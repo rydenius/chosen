@@ -460,7 +460,7 @@ Copyright (c) 2011 by Harvest
     Chosen.prototype.container_mousedown = function(evt) {
       var target_closelink;
       if (!this.is_disabled) {
-        target_closelink = evt != null ? evt.target.hasClassName("search-choice-close") : false;
+        target_closelink = evt != null ? $(evt.target).hasClassName("search-choice-close") : false;
         if (evt && evt.type === "mousedown" && !this.results_showing) {
           evt.stop();
         }
@@ -482,7 +482,7 @@ Copyright (c) 2011 by Harvest
     };
 
     Chosen.prototype.container_mouseup = function(evt) {
-      if (evt.target.nodeName === "ABBR" && !this.is_disabled) {
+      if ($(evt.target).nodeName === "ABBR" && !this.is_disabled) {
         return this.results_reset(evt);
       }
     };
@@ -512,7 +512,7 @@ Copyright (c) 2011 by Harvest
     };
 
     Chosen.prototype.test_active_click = function(evt) {
-      if (evt.target.up('#' + this.container_id)) {
+      if ($(evt.target).up('#' + this.container_id)) {
         return this.active_field = true;
       } else {
         return this.close_field();
@@ -654,7 +654,7 @@ Copyright (c) 2011 by Harvest
 
     Chosen.prototype.search_results_mouseup = function(evt) {
       var target;
-      target = evt.target.hasClassName("active-result") ? evt.target : evt.target.up(".active-result");
+      target = $(evt.target).hasClassName("active-result") ? evt.target : evt.target.up(".active-result");
       if (target) {
         this.result_highlight = target;
         this.result_select(evt);
@@ -664,21 +664,21 @@ Copyright (c) 2011 by Harvest
 
     Chosen.prototype.search_results_mouseover = function(evt) {
       var target;
-      target = evt.target.hasClassName("active-result") ? evt.target : evt.target.up(".active-result");
+      target = $(evt.target).hasClassName("active-result") ? evt.target : evt.target.up(".active-result");
       if (target) {
         return this.result_do_highlight(target);
       }
     };
 
     Chosen.prototype.search_results_mouseout = function(evt) {
-      if (evt.target.hasClassName('active-result') || evt.target.up('.active-result')) {
+      if ($(evt.target).hasClassName('active-result') || evt.target.up('.active-result')) {
         return this.result_clear_highlight();
       }
     };
 
     Chosen.prototype.choices_click = function(evt) {
       evt.preventDefault();
-      if (this.active_field && !(evt.target.hasClassName('search-choice') || evt.target.up('.search-choice')) && !this.results_showing) {
+      if (this.active_field && !($(evt.target).hasClassName('search-choice') || evt.target.up('.search-choice')) && !this.results_showing) {
         return this.results_show();
       }
     };
@@ -713,7 +713,7 @@ Copyright (c) 2011 by Harvest
       evt.preventDefault();
       if (!this.is_disabled) {
         this.pending_destroy_click = true;
-        return this.choice_destroy(evt.target);
+        return this.choice_destroy($(evt.target));
       }
     };
 
